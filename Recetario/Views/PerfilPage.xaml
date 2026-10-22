@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:comp="clr-namespace:Recetario.Views.Components"
+             x:Class="Recetario.Views.PerfilPage"
+             Title="Perfil y Rol"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F7F4EA">
+
+
+    <!-- ========================================================================= -->
+    <!--      CONTENEDOR PRINCIPAL (FILA 0: PERFIL Y ROL / FILA 1: BARRA INFERIOR)     -->
+    <!-- ========================================================================= -->
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0" Padding="16">
+
+            <VerticalStackLayout Spacing="14" MaximumWidthRequest="920" HorizontalOptions="Fill">
+
+
+                <!-- ========================================================================= -->
+                <!--      TARJETA SUPERIOR DE ACTOR ACTIVO Y POLIMORFISMO (HERENCIAS 1, 2 Y 3)     -->
+                <!-- ========================================================================= -->
+
+                <Border BackgroundColor="#E8EDE4"
+                        Stroke="#758B68"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="6">
+
+                        <Label Text="👤 Perfil de Usuario, Actores y Polimorfismo (Herencias 1, 2 y 3)"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Label x:Name="LblResumenActor"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#5A6B5C" />
+
+                        <Label x:Name="LblResultadoAccionRol"
+                               FontSize="13"
+                               TextColor="#283B2D"
+                               BackgroundColor="#FFFFFF"
+                               Padding="10,6" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+
+                <!-- ========================================================================= -->
+                <!--      SELECTOR DE ROL DEL DIAGRAMA DE CASOS DE USO (USUARIO, CHEF, ADMIN)     -->
+                <!-- ========================================================================= -->
+
+                <Border BackgroundColor="#FFFFFF"
+                        Stroke="#D8D3C4"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="16">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="🎭 Cambiar Actor Activo (Demostración de Permisos y EjecutarAccionRol)"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Label Text="Selecciona uno de los 3 actores del Diagrama de Casos de Uso para probar sus métodos polimórficos y casos de uso:"
+                               FontSize="12"
+                               TextColor="#5A6B5C" />
+
+
+                        <!--   BOTONES PARA CAMBIAR ENTRE LOS 3 ACTORES EN TIEMPO REAL   -->
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+
+                            <!--   COLUMNA 0: ACTOR USUARIO NORMAL / COCINERO   -->
+
+                            <Button Grid.Column="0"
+                                    Text="🧑‍🍳 Usuario / Cocinero&#x0a;(UsuarioNormal)"
+                                    Clicked="OnSeleccionarUsuarioNormalClicked"
+                                    BackgroundColor="#758B68"
+                                    TextColor="#FFFFFF"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12" />
+
+
+                            <!--   COLUMNA 1: ACTOR CREADOR ESPECIALISTA (CHEF / NUTRICIONISTA)   -->
+
+                            <Button Grid.Column="1"
+                                    Text="👨‍🍳 Creador Especialista&#x0a;(Chef / Nutricionista)"
+                                    Clicked="OnSeleccionarChefClicked"
+                                    BackgroundColor="#C8785A"
+                                    TextColor="#FFFFFF"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12" />
+
+
+                            <!--   COLUMNA 2: ACTOR ADMINISTRADOR / MODERADOR GLOBAL   -->
+
+                            <Button Grid.Column="2"
+                                    Text="🛡️ Administrador&#x0a;(Moderador Global)"
+                                    Clicked="OnSeleccionarAdminClicked"
+                                    BackgroundColor="#283B2D"
+                                    TextColor="#FFFFFF"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12" />
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+
+                <!-- ========================================================================= -->
+                <!--      FORMULARIO DE DATOS DEL USUARIO Y CONFIGURACIONPERFIL (AGREGACION 1)     -->
+                <!-- ========================================================================= -->
+
+                <Border BackgroundColor="#ECE8DC"
+                        Stroke="#D8D3C4"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="16">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="⚙️ Datos del Usuario y ConfiguracionPerfil (Agregación 1)"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+
+                        <!--   CAMPOS DE NOMBRE, CORREO ELECTRONICO Y BIOGRAFIA DEL USUARIO EN BLANCO   -->
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12" RowDefinitions="Auto,Auto">
+
+                            <VerticalStackLayout Grid.Column="0" Grid.Row="0">
+                                <Label Text="Nombre de Usuario" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryNombreUsuario"
+                                       Placeholder="Escribe tu nombre de usuario..."
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Grid.Row="0">
+                                <Label Text="Correo Electrónico" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryCorreoUsuario"
+                                       Placeholder="ejemplo@correo.cl"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.ColumnSpan="2" Grid.Row="1" Margin="0,6,0,0">
+                                <Label Text="Biografía" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryBiografiaUsuario"
+                                       Placeholder="Cuéntanos sobre tu estilo culinario..."
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#D8D3C4" />
+
+
+                        <!--   CAMPOS DE PREFERENCIAS DE TEMPORADA Y ORIGEN (CONFIGURACIONPERFIL)   -->
+
+                        <Label Text="Preferencias de Temporada y Origen (ConfiguracionPerfil):"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Estación Preferida" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerEstacionPref" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="País de Origen" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerOrigenPref" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label Text="Región Preferida" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryRegionPref"
+                                       Placeholder="Ej: Valle Central"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkIngredientesEstacion" Color="#758B68" />
+                            <Label Text="Priorizar frutas y verduras frescas de estación en sugerencias"
+                                   VerticalOptions="Center"
+                                   TextColor="#283B2D" />
+                        </HorizontalStackLayout>
+
+
+                        <!--   BOTON PARA GUARDAR Y VALIDAR EL PERFIL DE USUARIO (VERDE SALVIA)   -->
+
+                        <Button Text="💾 Guardar y Validar Perfil (IValidable)"
+                                Clicked="OnGuardarPerfilClicked"
+                                BackgroundColor="#758B68"
+                                TextColor="#FFFFFF"
+                                FontAttributes="Bold"
+                                CornerRadius="12" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+
+                <!-- ========================================================================= -->
+                <!--      PANEL INFORMATIVO DEL SISTEMA DE ARCHIVOS (MEMORIA SECUNDARIA JSON)     -->
+                <!-- ========================================================================= -->
+
+                <Border BackgroundColor="#FFFFFF"
+                        Stroke="#758B68"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="16">
+
+                    <VerticalStackLayout Spacing="6">
+
+                        <Label Text="💾 Estado del Sistema de Archivos (Memoria Secundaria JSON)"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Label x:Name="LblEstadisticasJson"
+                               FontSize="13"
+                               TextColor="#283B2D" />
+
+                        <Label x:Name="LblRutasJson"
+                               FontSize="11"
+                               TextColor="#5A6B5C" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+
+        <!-- ========================================================================= -->
+        <!--      BARRA DE NAVEGACION INFERIOR FIJA EN FILA 1     -->
+        <!-- ========================================================================= -->
+
+        <comp:BarraInferiorView Grid.Row="1" PestanaActiva="Perfil" />
+
+    </Grid>
+
+</ContentPage>
